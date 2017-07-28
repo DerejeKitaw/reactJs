@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/DerejeKitaw/reactJs/issues"
   },
-  "homepage": "https://github.com/DerejeKitaw/reactJs#readme"
+  "homepage": "https://github.com/DerejeKitaw/reactJs#readme",
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  }
 }
