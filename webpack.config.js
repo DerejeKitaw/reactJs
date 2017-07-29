@@ -1,4 +1,3 @@
-var webpack =require("webpack");
 var path= require("path");
 
 // Setup distribuition directory
@@ -13,16 +12,18 @@ var config ={
         filename: "bundle.js",
         publicPath: "/app/"
     },
-    modules:{
+    module: {
         loaders:[
             {
                 test: /\.js?/,
-                include:SRC_DIR,
-                loader:"babel-loader",
+                include: SRC_DIR,
+                loader: "babel-loader",
                 query: {
-                    preset: ["react", "es2015","stage-2"]
+                    presets: ["react", "es2015","stage-2"]
                 }
             }
         ]
     }
-}
+};
+
+module.exports = config;
