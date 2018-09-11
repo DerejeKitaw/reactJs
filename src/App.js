@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
 import Route from './components/Route';
+import Link from './components/Link';
 import Pacific from './components/Pacific';
 import Atlantic from './components/Atlantic';
 
+import createHistory from 'history/createBrowserHistory';
+const history = createHistory();
+
 class App extends Component {
+  componentDidMount() {
+    history.listen(() => this.forceUpdate());
+  }
   render() {
     return (
       <div className="App">
         <ul>
+          {' '}
           <li>
-            <a href="/atlantic">
+            <Link to="/atlantic">
               <code>/atlantic</code>
-            </a>
-          </li>
+            </Link>
+          </li>{' '}
           <li>
-            <a href="/pacific">
+            <Link to="/pacific">
               <code>/pacific</code>
-            </a>
-          </li>
+            </Link>
+          </li>{' '}
         </ul>
-
         <hr />
         <Route path="/atlantic" component={Atlantic} />
         <Route path="/pacific" component={Pacific} />
