@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import createHistory from 'history/createBrowserHistory';
 
-export default class Router extends React.Component {
+export default class Router extends Component {
+
   static childContextTypes = {
     history: PropTypes.object,
-    location: PropTypes.object
+    location: PropTypes.object,
   };
 
   constructor(props) {
@@ -18,7 +19,7 @@ export default class Router extends React.Component {
   getChildContext() {
     return {
       history: this.history,
-      location: window.location
+      location: window.location,
     };
   }
 
