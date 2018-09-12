@@ -20,4 +20,22 @@
 > Let’s use Router inside App before building it. Because we will no longer need to use componentDidMount() in App, we can turn the component into a stateless function.
 
 > At the top of App, we’ll convert the component to a function, remove componentDidMount(), and add the opening tag for <Router>:
+Route.js
+  ```js
+  import React from 'react';
+import PropTypes from 'prop-types';
 
+const Route = ({ path, component }, { location }) => {
+  const pathname = location.pathname;
+  if (pathname.match(path)) {
+    return React.createElement(component);
+  } else {
+    return null;
+  }
+};
+
+Route.contextTypes = {
+  location: PropTypes.object
+};
+export default Route;
+```
