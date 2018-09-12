@@ -1,125 +1,23 @@
-# Building Link
+# Building Router
+> Our basic version of Router should do two things:
+1. Supply its children with context for both location and history 
+2. Re-render the app whenever the history changes.
 
-> When the user clicks on <a> tag, we’ll want the browser to skip its default routine of making a web request to fetch the next page.
+> Regarding the first requirement, at the moment our Route and Link components are using two external APIs directly. 
 
-> Instead, we just want to manually update the browser’s location.
+> Route uses window.location to read the location and Link uses history to modify the location. 
 
-> Most browsers supply an API for managing the history of the current session, [`window.history`](https://developer.mozilla.org/en-US/docs/Web/API/History_API). 
+> Redirect will need to access the same APIs. 
 
-> It has methods like 
-  * history.back() and 
-  * history.forward() - to navigate the history stack.
-  * pushState() - to navigate the browser to a desired location.
+> The Router supplied by react-router makes these APIs available to child components via context. 
 
-# Install "history":"~4.7.2"
+> This is a cleaner pattern and means you can easily inject your own location or history object into your app for testing purposes.
 
-* this function create an object, called history, which we’ll use to interact with the browser’s history API:
+> Regarding the second requirement, right now App subscribes to history in componentDidMount(). 
 
-# Create `Link` component 
+> * We’ll move this responsibility up to Router, which will be our app’s top-most component.
 
-> that produces an <a> tag with a special onClick binding.
-> When the user clicks on the Link component, we’ll want to prevent the browser from making a request. Instead, `we’ll use the history API to update the browser’s location.` 
+> Let’s use Router inside App before building it. Because we will no longer need to use componentDidMount() in App, we can turn the component into a stateless function.
 
-Link.js
-```js
-import React from 'react';
+> At the top of App, we’ll convert the component to a function, remove componentDidMount(), and add the opening tag for <Router>:
 
-import createHistory from 'history/createBrowserHistory';
-const history = createHistory();
-
-export default ({ to, children }) => (
-  <a
-    onClick={e => {
-      e.preventDefault();
-      history.push(to);
-    }}
-    href={to}
-  >
-    {children}
-  </a>
-);
-
-```
-
-App.js
-```js
-import React, { Component } from 'react';
-import Route from './components/Route';
-import Link from './components/Link';
-import Pacific from './components/Pacific';
-import Atlantic from './components/Atlantic';
-
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <ul>
-          {' '}
-          <li>
-            <Link to="/atlantic">
-              <code>/atlantic</code>
-            </Link>
-          </li>{' '}
-          <li>
-            <Link to="/pacific">
-              <code>/pacific</code>
-            </Link>
-          </li>{' '}
-        </ul>
-        <hr />
-        <Route path="/atlantic" component={Atlantic} />
-        <Route path="/pacific" component={Pacific} />
-      </div>
-    );
-  }
-}
-
-export default App;
-```
-### Now the route in the url updates but component is not updating.
-
-> Use compoentDidMount life cycle to update the component
-
-App.js
-```js
-import React, { Component } from 'react';
-import Route from './components/Route';
-import Link from './components/Link';
-import Pacific from './components/Pacific';
-import Atlantic from './components/Atlantic';
-
-import createHistory from 'history/createBrowserHistory';
-const history = createHistory();
-
-class App extends Component {
-  componentDidMount() {
-    history.listen(() => this.forceUpdate());
-  }
-  render() {
-    return (
-      <div className="App">
-        <ul>
-          {' '}
-          <li>
-            <Link to="/atlantic">
-              <code>/atlantic</code>
-            </Link>
-          </li>{' '}
-          <li>
-            <Link to="/pacific">
-              <code>/pacific</code>
-            </Link>
-          </li>{' '}
-        </ul>
-        <hr />
-        <Route path="/atlantic" component={Atlantic} />
-        <Route path="/pacific" component={Pacific} />
-      </div>
-    );
-  }
-}
-
-export default App;
-
-```
-TODO: It is not updating view.

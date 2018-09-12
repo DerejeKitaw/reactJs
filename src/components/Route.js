@@ -1,12 +1,16 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default ({ path, component }) => {
-  const pathname = window.location.pathname;
+const Route = ({ path, component }, { location }) => {
+  const pathname = location.pathname;
   if (pathname.match(path)) {
-    return (
-      React.createElement(component)
-    );
+    return React.createElement(component);
   } else {
     return null;
   }
 };
+
+Route.contextTypes = {
+  location: PropTypes.object
+};
+export default Route;
