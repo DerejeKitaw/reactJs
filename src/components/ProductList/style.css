@@ -1,0 +1,33 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: 0px; }
+
+.item {
+  width: 700px;
+  padding: .5em;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-gap: .5em; }
+  .item .image img {
+    max-width: 100%;
+    max-height: 100%;
+    padding: .1em; }
+  .item .content {
+    background: lightcyan;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    height: 120px; }
+    .item .content .description {
+      padding: 0 0.1em 0 0.2em; }
+      .item .content .description a {
+        font-size: 1.5em; }
+    .item .content .extra {
+      padding: 0 1em 3em 0; }
+      .item .content .extra span {
+        color: green;
+        padding: 0 1em 0 0.2em; }
+      .item .content .extra img {
+        width: 4%;
+        border-radius: 50%; }
