@@ -26,14 +26,23 @@ class App extends Component {
     const show = this.state.showPersons;
     this.setState({ showPersons: !show });
   };
+  deletePersonHandler = (personIndex) => {
+    // console.log('personIndex', personIndex);
+    const persons = this.state.persons;
+    persons.splice(personIndex, 1);
+    this.setState({showPersons: persons})
+  }
   render() {
     let person = null;
     if (this.state.showPersons) {
       person = (
         <div>
-          {this.state.persons.map(person => {
-            // console.log(person);
-            return <Person key={person.name} name={person.name} age={person.age} />;
+          {this.state.persons.map((person, index) => {
+            return <Person
+              clickGGGG={() => this.deletePersonHandler(index)}
+              key={index}
+              name={person.name}
+              age={person.age} />;
           })}
         </div>
       );
