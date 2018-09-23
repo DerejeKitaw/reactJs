@@ -5,9 +5,9 @@ import Person from './components/Person';
 class App extends Component {
   state = {
     persons: [
-      { name: 'Winta', age: 10 },
-      { name: 'Ruhama', age: 8 },
-      { name: 'Noah', age: 5 }
+      { id:1 ,name: 'Winta', age: 10 },
+      { id:2 ,name: 'Ruhama', age: 8 },
+      { id:3 ,name: 'Noah', age: 5 }
     ],
     showPersons: true
   };
@@ -34,6 +34,22 @@ class App extends Component {
     persons.splice(personIndex, 1);
     this.setState({persons: persons})
   }
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    })
+    const person = {
+      ...this.state.persons[personIndex]
+    }
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+
+    persons[personIndex] = person;
+    this.setState({
+      persons: persons
+    })
+  }
   render() {
     let person = null;
     if (this.state.showPersons) {
@@ -41,8 +57,9 @@ class App extends Component {
         <div>
           {this.state.persons.map((person, index) => {
             return <Person
-              clickGGGG={() => this.deletePersonHandler(index)}
-              key={index}
+              // clickGGGG={() => this.deletePersonHandler(index)}
+              changed={(event)=>this.nameChangedHandler(event, person.id)}
+              key={person.id}
               name={person.name}
               age={person.age} />;
           })}
