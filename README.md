@@ -259,3 +259,7 @@ class App extends Component {
 export default App;
 
 ```
+> Second way which is inefficient
+```html
+<button onClick={()=>this.switchNameHandler("Dad")} className="btn btn-primary">Switch Name</button>
+```
