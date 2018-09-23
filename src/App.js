@@ -27,10 +27,12 @@ class App extends Component {
     this.setState({ showPersons: !show });
   };
   deletePersonHandler = (personIndex) => {
-    // console.log('personIndex', personIndex);
-    const persons = this.state.persons;
+    console.log('personIndex', personIndex);
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    // const persons = this.state.persons;
     persons.splice(personIndex, 1);
-    this.setState({showPersons: persons})
+    this.setState({persons: persons})
   }
   render() {
     let person = null;
