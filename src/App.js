@@ -27,6 +27,29 @@ class App extends Component {
     this.setState({ showPersons: !show });
   };
   render() {
+    let person = null;
+    if (this.state.showPersons) {
+      person = (
+        <div>
+          <Person />
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+          />
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+          />
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}
+            clickP={this.switchNameHandler.bind(this, 'Helu')}
+          >
+            My Hobbies: Sport
+          </Person>
+        </div>
+      );
+    }
     return (
       <div className="container">
         <Home />
@@ -40,26 +63,7 @@ class App extends Component {
         <button onClick={this.togglePersonhandler} className="btn btn-primary">
           Toggle Person
         </button>
-        {this.state.showPersons ? (
-          <div>
-            <Person />
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}
-            />
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-            />
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age}
-              clickP={this.switchNameHandler.bind(this, 'Helu')}
-            >
-              My Hobbies: Sport
-            </Person>
-          </div>
-        ) : null}
+        {person}
       </div>
     );
   }
