@@ -9,7 +9,7 @@ class App extends Component {
       { name: 'Ruhama', age: 8 },
       { name: 'Noah', age: 5 }
     ],
-    showPersons: false
+    showPersons: true
   };
   switchNameHandler = newName => {
     // console.log('Clicked');
@@ -31,22 +31,10 @@ class App extends Component {
     if (this.state.showPersons) {
       person = (
         <div>
-          <Person />
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age}
-          />
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-          />
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age}
-            clickP={this.switchNameHandler.bind(this, 'Helu')}
-          >
-            My Hobbies: Sport
-          </Person>
+          {this.state.persons.map(person => {
+            // console.log(person);
+            return <Person key={person.name} name={person.name} age={person.age} />;
+          })}
         </div>
       );
     }
