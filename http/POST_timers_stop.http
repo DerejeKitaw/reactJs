@@ -1,0 +1,7 @@
+
+POST http://localhost:6000/api/timers/stop/ HTTP/1.1
+content-type: application/json
+
+{
+     "_id": "5ba890b17e3372253043932c"
+}

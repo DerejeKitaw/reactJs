@@ -5,7 +5,7 @@ export default() => (
   <div className="container">
     <h3>Home Component</h3>
     <p className="description">
-      This is home component
+      This is home component!
     </p>
   </div>
 );

@@ -1,0 +1,13 @@
+
+POST http://localhost:6000/api/timers/5ba890b17e3372253043932c HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Learn Advanced React!",
+    "project": "Web App",
+    "elapsed": "8986300",
+    "runningSince": "",
+    "editFormOpen": "false",
+    "date": "2018-09-24T06:13:13.166Z",
+    "__v": 0
+  }
