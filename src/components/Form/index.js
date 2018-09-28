@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import FormField from '../utils/Formfield';
-import {updateChange} from '../utils/form_methods';
+import {updateChange, generateData, isFormValid} from '../utils/form_methods';
+// import {generateData} from '../utils/form_methods';
+// import {isFormValid} from '../utils/form_methods';
 
 export default class extends Component {
   state = {
@@ -62,6 +64,18 @@ export default class extends Component {
   submitForm(event) {
     event.preventDefault();
     console.log('submitted');
+    
+    let dataToSubmit = generateData(this.state.formData);
+    let formIsValid = isFormValid(this.state.formData)
+
+  //   if(formIsValid){
+  // // TODO: Disptch form value
+  //     console.log(dataToSubmit);
+  //   } else {
+  //       this.setState({
+  //           formError: true
+  //       })
+  //   }
   }
   componentWillUpdate() {
     console.log('componentWillUpdate');
