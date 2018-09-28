@@ -46,7 +46,9 @@ export default ({ id, fieldData, change }) => {
       case ('input'):
         formTemplate = (
           <div className="col-md-6 mb-3">
-            <label htmlFor="firstName">First name</label>
+          { fieldData.showLabel ? 
+            <label htmlFor={id} className="label_inputs">{fieldData.config.label}</label>
+        :null}
             <input
             value={fieldData.value}
             onBlur={(event)=> change({event,id,blur:true})}

@@ -13,14 +13,34 @@ export default class extends Component {
         valid: false,
         touched: false,
         validationMessage: '',
+        showLabel:true,
         config: {
           name: 'email_input',
           type: 'email',
-          placeholder: 'Enter your email'
+          placeholder: 'Enter your email',
+          label:'Email'
         },
         validation: {
           required: true,
           email: true
+        }
+      },
+      firstName: {
+        element: 'input',
+        value: '',
+        valid: false,
+        touched: false,
+        validationMessage: 'First Name is required',
+        showLabel:true,
+        config: {
+          name: 'first_name',
+          type: 'text',
+          placeholder: 'Enter your First Name',
+          label:'First Name'
+        },
+        validation: {
+          required: true,
+          email: false
         }
       }
     }
@@ -53,6 +73,11 @@ export default class extends Component {
           <FormField
             id={'email'}
             fieldData={this.state.formData.email}
+            change={changedField => this.updateForm(changedField)}
+          />
+          <FormField
+            id={'firstName'}
+            fieldData={this.state.formData.firstName}
             change={changedField => this.updateForm(changedField)}
           />
 
