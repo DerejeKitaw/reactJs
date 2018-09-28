@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FormField from '../utils/Formfield';
+import {updateChange} from '../utils/form_methods';
 
 export default class extends Component {
   state = {
@@ -29,25 +30,14 @@ export default class extends Component {
    *              - updated form Data
    */
   updateForm = changedField => {
-    // clone formData
-    const newFormData = {
-      ...this.state.formData
-    };
-    // get new element updated. changedField = {event, id}
-    const newElement = {
-      ...newFormData[changedField.id]
-    };
-    // changedField = {event, id}
-    newElement.value = changedField.event.target.value;
-    newFormData[changedField.id] = newElement;
+    const newFormData = updateChange(changedField, this.state.formData);
 
-    console.log('newFormData', newFormData);
-    console.log('newElement', newElement);
     this.setState({
       formError: false,
       formData: newFormData
     });
   };
+  
   submitForm(event) {
     event.preventDefault();
     console.log('submitted');
