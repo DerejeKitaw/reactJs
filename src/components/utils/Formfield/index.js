@@ -1,4 +1,5 @@
 import React from 'react';
+import './style.css';
 /**
    * @desc this class will return FormField component
    * @param {string} id - Field name defined in state.formData
@@ -25,13 +26,54 @@ import React from 'react';
   * @return jsx - form field
   */
 export default ({ id, fieldData, change }) => {
-  console.log(fieldData);
+  const showError=()=> {
+    let errorMessage = null;
+    if (fieldData.validation && !fieldData.valid) {
+      console.log('fieldData',fieldData);
+      console.log('fieldData.validation',fieldData.validation);
+      console.log('fieldData.validationMessage',fieldData.validationMessage);
+      errorMessage = (
+        <div>
+          {fieldData.validationMessage}
+        </div>
+      )
+    }
+    return errorMessage;
+  }
+  const renderTemplate = () => {
+    let formTemplate = null;
+    switch (fieldData.element) {
+      case ('input'):
+        formTemplate = (
+          <div className="col-md-6 mb-3">
+            <label htmlFor="firstName">First name</label>
+            <input
+            value={fieldData.value}
+            onBlur={(event)=> change({event,id,blur:true})}
+            onChange={event => change({ event, id })}
+              type="text"
+              className="form-control"
+              placeholder=""
+            />
+            <div className="error">
+            {showError()}
+            </div>
+
+          </div>
+      )
+        
+        break;
+    
+        default:
+        formTemplate = null;
+    }
+
+    return formTemplate;
+}
   return (
     <div>
-      <input
-        value={fieldData.value}
-        onChange={event => change({ event, id })}
-      />
+    {renderTemplate()}
+    
     </div>
   );
 };

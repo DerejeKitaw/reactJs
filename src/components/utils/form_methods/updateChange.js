@@ -22,10 +22,19 @@
         }
       }
  * }
- * @param {Object} changedField - {event, id}
+ * @param {Object} changedField - {event, id, blur}
  * Eg id ='email' id is fields in the form
+ * 
+      console.log('changedField', changedField); return
+      changedField {event: SyntheticEvent, id: "email"}
+
+      console.log('formData[changedField.id]', formData[changedField.id]); return
+      {element: "input", value: "", valid: false, touched: false, validationMessage: "", …}
  * @return updated formData
  */
+
+import {validate} from './validate';
+
 export const updateChange = (changedField, formData) => {
   const newFormData = {
     ...formData
@@ -33,7 +42,17 @@ export const updateChange = (changedField, formData) => {
   const newElement = {
     ...newFormData[changedField.id]
   };
+  // console.log('newElement', changedField.blur); 
+
+  // update value
   newElement.value = changedField.event.target.value;
+
+  // validate input value when leave input field
+  if (changedField.blur) {
+    let validData = validate(newElement,formData);
+      newElement.valid = validData[0];
+      newElement.validationMessage = validData[1];
+  }
   newFormData[changedField.id] = newElement;
   return newFormData;
 };

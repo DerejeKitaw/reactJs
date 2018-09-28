@@ -31,6 +31,7 @@ export default class extends Component {
    */
   updateForm = changedField => {
     const newFormData = updateChange(changedField, this.state.formData);
+    console.log('newFormData.validationMessage', newFormData[changedField.id].validationMessage);
 
     this.setState({
       formError: false,
@@ -42,6 +43,9 @@ export default class extends Component {
     event.preventDefault();
     console.log('submitted');
   }
+  componentWillUpdate() {
+    console.log('componentWillUpdate');
+  }
   render() {
     return (
       <div>
@@ -51,6 +55,7 @@ export default class extends Component {
             fieldData={this.state.formData.email}
             change={changedField => this.updateForm(changedField)}
           />
+
           <button onClick={event => this.submitForm(event)}>Log in</button>
         </form>
       </div>
